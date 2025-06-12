@@ -45,16 +45,17 @@ public class Main {
 
 
 
+
             } else if(password.isEmpty()){
                 System.out.println("Moving to User Interface");
 
                 UserInterface UI = new UserInterface(dealershipDAO,salesContractDAO, leaseContractDAO);
 
                 UI.displayMenu();
-                break;
+
             } else if (password.equalsIgnoreCase("0")) {
                 System.out.println("Quitting application...");
-                break;
+                System.exit(0);
 
             } else {
                 System.out.println("Wrong Password...");

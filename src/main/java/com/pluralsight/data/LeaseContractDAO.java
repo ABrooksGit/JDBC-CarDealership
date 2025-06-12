@@ -5,6 +5,7 @@ import com.pluralsight.dealership.Vehicle;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -74,4 +75,51 @@ public class LeaseContractDAO {
         return leaseResults;
 
     }
+
+    public void createLease(LocalDate date, String customerName, String customerEmail,int id,int vin, double totalVehiclePrice,double monthlyPayment){
+
+
+        String createLease = """
+                INSERT INTO lease_contract
+                (date_sold,customer_name,customer_email,id,vin,total_vehicle_price,monthly_payment)
+                VALUES
+                (?,?,?,?,?,?,?);
+                """;
+
+
+        try(Connection c = basicDataSource.getConnection();
+            PreparedStatement ps = c.prepareStatement(createLease)
+        ){
+            ps.setDate(1, Date.valueOf(date));
+            ps.setString(2, customerName);
+            ps.setString(3, customerEmail);
+            ps.setInt(4, id);
+            ps.setInt(5,vin);
+            ps.setDouble(6,totalVehiclePrice);
+            ps.setDouble(7, monthlyPayment);
+
+            int rows = ps.executeUpdate();
+
+            System.out.println("ROWS UPDATED " + rows);
+
+
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
 }

@@ -27,31 +27,11 @@ public class AdminUserInterface {
         this.l = l;
     }
 
-    private  void init(){
-
-
-
-    }
-
-    public void displayMenu() {
-
-
-        display();
-    }
-
-    private void displayContracts(ArrayList<Contract> contracts){
-
-
-        for (Contract c : contracts){
-            System.out.println(c);
-        }
-
-
-
-    }
 
     private void displayAllContacts(){
 
+        l.getLeaseContracts().stream().forEach(l -> System.out.println(l.toString()));
+        s.getSalesContracts().stream().forEach( s -> System.out.println(s.toString()));
 
 
 
@@ -154,12 +134,12 @@ public class AdminUserInterface {
             System.out.println( ColorCodes.RED + "No Vehicles with this Vin Number..." + ColorCodes.RESET);
         }
 
-        for(Vehicle vehicle : vinNumber){
-            LeaseContract leaseContract = new LeaseContract(date, name, email, vehicle, vehicle.getPrice(), vehicle.getPrice());
+//        for(Vehicle vehicle : vinNumber){
+//            LeaseContract leaseContract = new LeaseContract(date, name, email, vehicle, vehicle.getPrice(), vehicle.getPrice());
 //            c.add(leaseContract);
-            displayLease();
+//            displayLease();
 
-        }
+//        }
 
 
 
@@ -185,16 +165,16 @@ public class AdminUserInterface {
         boolean financeSelected = finance == 1;
 
 
-        for(Vehicle vehicle : vinNumber){
+//        for(Vehicle vehicle : vinNumber){
 
-            double salesTax = vehicle.getPrice() * 0.05;
-            double recordingFee = 500;
-            double processingFee = (vehicle.getPrice() < 10000) ? 295 : 495;
+//            double salesTax = vehicle.getPrice() * 0.05;
+//            double recordingFee = 500;
+//            double processingFee = (vehicle.getPrice() < 10000) ? 295 : 495;
 
 //            SalesContract salesContract = new SalesContract(date, name, email, vehicle, financeSelected);
-            SalesContract salesContract = new SalesContract(date,name,email,vehicle,salesTax,recordingFee,processingFee,financeSelected);
+//            SalesContract salesContract = new SalesContract(date,name,email,vehicle,salesTax,recordingFee,processingFee,financeSelected);
 //            c.add(salesContract);
-            displaySales();
+//            displaySales();
 
 //            d.removeVehicle(vehicle);
 //            DealershipFileManager.saveDealership(d);
@@ -209,7 +189,7 @@ public class AdminUserInterface {
 
 
 
-}
+
 
 
 //        int year = console.promptForInt("Enter Year: ");

@@ -4,18 +4,15 @@ import com.pluralsight.dealership.SalesContract;
 import com.pluralsight.dealership.Vehicle;
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SalesContractDAO {
 
     private BasicDataSource basicDataSource;
+
 
     public SalesContractDAO(BasicDataSource basicDataSource) {
         this.basicDataSource = basicDataSource;
@@ -90,5 +87,62 @@ public class SalesContractDAO {
         }
 
         return salesResults;
+    }
+
+
+    public void createASale(LocalDate date, String customerName, String customerEmail,
+                            int id, int vin, double salesTax, double processingFee, double recordingFee,
+                            double totalPrice, boolean financed, double monthlyPayment){
+
+
+        String createSale = """
+                INSERT INTO sales_contract
+                (date_sold,
+                customer_name,
+                customer_email,
+                id,
+                vin,
+                sales_Tax,
+                processingFee,
+                Recording_Fee,
+                total_Price,
+                financed,
+                monthly_Payment)
+                VALUES (?,?,?,?,?,?,?,?,?,?,?)
+                
+              
+                """;
+
+
+                try(Connection c = basicDataSource.getConnection();
+                    PreparedStatement ps = c.prepareStatement(createSale);
+
+
+                ){
+
+                    ps.setDate(1, Date.valueOf(date));
+                    ps.setString(2, customerName);
+                    ps.setString(3, customerEmail);
+                    ps.setInt(4, id);
+                    ps.setInt(5,vin);
+                    ps.setDouble(6,salesTax);
+                    ps.setDouble(7,processingFee);
+                    ps.setDouble(8,recordingFee);
+                    ps.setDouble(9,totalPrice);
+                    ps.setBoolean(10,financed);
+                    ps.setDouble(11,monthlyPayment);
+
+                    int rows = ps.executeUpdate();
+                    System.out.println("ROWS UPDATED " + rows);
+
+
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+
+
+
     }
 }
