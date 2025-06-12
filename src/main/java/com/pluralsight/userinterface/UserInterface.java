@@ -123,7 +123,7 @@ public class UserInterface {
                     processAddVehicleRequest();
                     break;
                 case 9:
-//                    startProcessToRemoveVehicle();
+                    startProcessToRemoveVehicle();
                     break;
                 case 10:
 //                    processVehicleBySale();
@@ -279,6 +279,9 @@ public class UserInterface {
 
 //        Vehicle vehicle = new Vehicle(vin, year, make, model, type, color, odometer, price);
         d.addVehicleToDealership(vin,year,make,model,type,color,odometer,price,sold);
+        d.addVehicleToInventory(vin);
+
+
 
 
 //        DealershipFileManager.saveDealership(d);
@@ -286,46 +289,45 @@ public class UserInterface {
     }
 
 
-//    private void startProcessToRemoveVehicle() {
-//        int choice;
-//        do {
-//
-//
-//            choice = console.promptForInt("Do you want to check the Vehicle list? (1 or 2 ):   ");
-//            switch (choice) {
-//                case 1:
-//                    displayVehicles(d.getAllVehicles());
-//                    break;
-//                case 2:
-//                    processRemoveVehicleRequest();
-//                    break;
-//            }
-//
-//
-//        } while (choice != 2);
-//    }
+    private void startProcessToRemoveVehicle() {
+        int choice;
+        do {
 
 
-//    private void processRemoveVehicleRequest() {
-//
-//        System.out.println("Which Vehicle do you want to Remove?: ");
-//        int vin = console.promptForInt("Enter VIN: ");
-//
-//        ArrayList<Vehicle> choiceResult = d.getVehicleByVinNumber(vin);
-//
-//
-//        if (choiceResult.isEmpty()) {
-//            System.out.println( ColorCodes.RED + "No Vehicle...." + ColorCodes.RESET);
-//
-//        } else {
-//            for (Vehicle vehicle : choiceResult) {
-//                d.removeVehicle(vehicle);
-//                System.out.println( ColorCodes.PURPLE +choiceResult + " Was Removed...." + ColorCodes.RESET);
-//            }
-//        }
-//        DealershipFileManager.saveDealership(d);
-//
-//    }
+            choice = console.promptForInt("Do you want to check the Vehicle list? (1 or 2 ):   ");
+            switch (choice) {
+                case 1:
+                    displayVehicles(d.getDealership().getAllVehicles());
+                    break;
+                case 2:
+                    processRemoveVehicleRequest();
+                    break;
+            }
+
+
+        } while (choice != 2);
+    }
+
+
+    private void processRemoveVehicleRequest() {
+
+        System.out.println("Which Vehicle do you want to Remove?: ");
+        int vin = console.promptForInt("Enter VIN: ");
+
+        ArrayList<Vehicle> choiceResult = d.getDealership().getVehicleByVinNumber(vin);
+
+
+        if (choiceResult.isEmpty()) {
+            System.out.println( ColorCodes.RED + "No Vehicle...." + ColorCodes.RESET);
+
+        } else {
+                d.removeVehicleFromDealership(vin);
+                System.out.println( ColorCodes.PURPLE + choiceResult + " Was Removed...." + ColorCodes.RESET);
+            }
+        }
+
+
+    }
 
 
 //    private void processVehicleByLease() {
@@ -380,4 +382,3 @@ public class UserInterface {
 //        }
 //    }
 
-}

@@ -158,7 +158,7 @@ public class AdminUserInterface {
             LeaseContract leaseContract = new LeaseContract(date, name, email, vehicle, vehicle.getPrice(), vehicle.getPrice());
 //            c.add(leaseContract);
             displayLease();
-            ContractFileManager.saveContracts(leaseContract);
+
         }
 
 
@@ -195,7 +195,7 @@ public class AdminUserInterface {
             SalesContract salesContract = new SalesContract(date,name,email,vehicle,salesTax,recordingFee,processingFee,financeSelected);
 //            c.add(salesContract);
             displaySales();
-            ContractFileManager.saveContracts(salesContract);
+
 //            d.removeVehicle(vehicle);
 //            DealershipFileManager.saveDealership(d);
 

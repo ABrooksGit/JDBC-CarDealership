@@ -121,6 +121,9 @@ public class DealershipDAO {
                 Values(?,?,?,?,?,?,?,?,?);
                 """;
 
+
+
+
         try (Connection c = dataSource.getConnection();
              PreparedStatement ps = c.prepareStatement(addVehicle);
         )
@@ -143,7 +146,56 @@ public class DealershipDAO {
             throw new RuntimeException(e);
         }
 
+    }
 
+    public void addVehicleToInventory(int vin){
+
+        String addToInventory = """
+            INSERT INTO inventory (dealership_id, vin)
+            VALUES (?, ?);
+            """;
+
+        try(Connection c = dataSource.getConnection();
+            PreparedStatement p = c.prepareStatement(addToInventory)
+        ){
+            p.setInt(1,dealershipId);
+            p.setInt(2,vin);
+
+            int rows = p.executeUpdate();
+
+            System.out.println("ROWS UPDATED " + rows);
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
+    public void removeVehicleFromDealership(int vin){
+
+
+
+        String removeVehicle = """
+                delete from inventory
+                where vin= ?;
+                """;
+
+
+
+        try(Connection c = dataSource.getConnection();
+            PreparedStatement ps = c.prepareStatement(removeVehicle);
+        ) {
+            ps.setInt(1 , vin);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }
