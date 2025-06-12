@@ -120,7 +120,7 @@ public class UserInterface {
                     processGetByAllVehiclesRequest();
                     break;
                 case 8:
-//                    processAddVehicleRequest();
+                    processAddVehicleRequest();
                     break;
                 case 9:
 //                    startProcessToRemoveVehicle();
@@ -264,23 +264,26 @@ public class UserInterface {
     }
 
 
-//    private void processAddVehicleRequest() {
-//        System.out.println("Enter vehicle information");
-//
-//        int vin = console.promptForInt("Enter VIN: ");
-//        int year = console.promptForInt("Enter Year: ");
-//        String make = console.promptForString("Enter Make: ");
-//        String model = console.promptForString("Enter Model: ");
-//        String type = console.promptForString("Vehicle Type: ");
-//        String color = console.promptForString("Enter Color: ");
-//        int odometer = console.promptForInt("Enter Distance ");
-//        double price = console.promptForDouble("Enter Price: ");
-//
+    private void processAddVehicleRequest() {
+        System.out.println("Enter vehicle information");
+
+        int vin = console.promptForInt("Enter VIN: ");
+        int year = console.promptForInt("Enter Year: ");
+        String make = console.promptForString("Enter Make: ");
+        String model = console.promptForString("Enter Model: ");
+        String type = console.promptForString("Vehicle Type: ");
+        String color = console.promptForString("Enter Color: ");
+        int odometer = console.promptForInt("Enter Distance ");
+        double price = console.promptForDouble("Enter Price: ");
+        boolean sold = false;
+
 //        Vehicle vehicle = new Vehicle(vin, year, make, model, type, color, odometer, price);
-//        d.addVehicle(vehicle);
+        d.addVehicleToDealership(vin,year,make,model,type,color,odometer,price,sold);
+
+
 //        DealershipFileManager.saveDealership(d);
-//
-//    }
+
+    }
 
 
 //    private void startProcessToRemoveVehicle() {

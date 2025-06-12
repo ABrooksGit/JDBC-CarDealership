@@ -34,7 +34,7 @@ public class Main {
             System.out.println("If you are a User, Just ignore the password and press Enter");
 
 
-            password = console.promptForString("Enter your password: ");
+            password = console.promptForString("Enter your password: ", true);
 
             if(password.equalsIgnoreCase("Admin")){
                 System.out.println("Correct Password... Moving to Admin UI");
