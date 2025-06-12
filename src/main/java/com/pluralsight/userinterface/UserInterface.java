@@ -77,26 +77,24 @@ public class UserInterface {
 
     private void display() {
 
-        int input;
-        String homeScreenPrompt = """
-                What do you want to do:\s
-                 1 - Find vehicles within a price range\s
-                 2 - Find vehicles by make / model\s
-                 3 -  Find vehicles by year range
-                 4 -  Find vehicles by color
-                 5 -  Find vehicles by mileage range
-                 6 -  Find vehicles by type (car, truck, SUV, van)
-                 7 - List ALL vehicles
-                 8 - Add a vehicle
-                 9 - Remove a vehicle
-                 10- Create A Sale
-                 11- Create A Lease
-                 0 - Quit
-                Enter your command(number 1-11):\s""";
 
+        while (true) {
+            String[] homeScreenPrompt = {
+              "Find vehicles within a price range",
+              "Find vehicles by make / model",
+              "Find vehicles by year range",
+              "Find vehicles by color",
+             "Find vehicles by mileage range",
+              "Find vehicles by type (car, truck, SUV, van)",
+              "List ALL vehicles",
+              "Add a vehicle",
+              "Remove a vehicle",
+              "Create A Sale",
+              "Create A Lease",
+              "Quit"
+             };
 
-        do {
-            input = console.promptForInt(homeScreenPrompt);
+            int input = console.promptForOption(homeScreenPrompt);
             switch (input) {
                 case 1:
                     processGetByPriceRequest();
@@ -131,17 +129,14 @@ public class UserInterface {
                 case 11:
 //                    processVehicleByLease();
                     break;
-                case 0:
+                case 12:
                     System.out.println("Quitting...");
+                    System.exit(0);
                     break;
-                default:
-                    System.out.println("Not a valid input");
-                    break;
+
             }
 
-
-        } while (input != 0);
-
+        }
     }
 
 

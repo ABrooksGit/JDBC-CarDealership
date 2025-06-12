@@ -61,10 +61,14 @@ public class Console {
                 if (choice >= 1 && choice <= options.length) {
                     return choice; //returns current choice
                 } else {
-                    System.out.println("Invalid choice. Please enter a number between 1 and " + options.length + ".");
+                    System.out.println(" ");
+                    System.out.println(ColorCodes.RED + "Invalid choice. Please enter a number between 1 and " + options.length + "." + ColorCodes.RESET);
+                    System.out.println(" ");
                 }
             } catch (Exception e) {
-                System.out.println("Invalid input. Please enter a number.");
+                System.out.println(" ");
+                System.out.println(ColorCodes.RED + "Invalid input. Please enter a number." + ColorCodes.RESET);
+                System.out.println(" ");
             }
         }
     }
