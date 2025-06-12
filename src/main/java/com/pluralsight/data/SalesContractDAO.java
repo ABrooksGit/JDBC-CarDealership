@@ -24,7 +24,7 @@ public class SalesContractDAO {
 
     public List<SalesContract> getSalesContracts() {
 
-        ArrayList<SalesContract> results = new ArrayList<SalesContract>();
+        ArrayList<SalesContract> salesResults = new ArrayList<SalesContract>();
         Vehicle vehicle;
 
 
@@ -44,7 +44,7 @@ public class SalesContractDAO {
                 sales_tax,
                 recording_fee,
                 processingFee,
-                total_price
+                total_price,
                 financed,
                 monthly_payment
                 From
@@ -57,27 +57,27 @@ public class SalesContractDAO {
              PreparedStatement s = c.prepareStatement(query);
              ResultSet queryResults = s.executeQuery();
         ) {
-            if (queryResults.next()) {
-                String date = queryResults.getString(1);
-                String customerName = queryResults.getString(2);
-                String customerEmail = queryResults.getString(3);
-                int vin = queryResults.getInt(4);
-                int year = queryResults.getInt(5);
-                String make = queryResults.getString(6);
-                String model = queryResults.getString(7);
-                String color = queryResults.getString(8);
-                String type = queryResults.getString(9);
-                int odometer = queryResults.getInt(10);
-                double price = queryResults.getDouble(11);
-                int salesTax = queryResults.getInt(12);
-                int recordingFee = queryResults.getInt(13);
-                int processingFee = queryResults.getInt(14);
-                double totalPrice = queryResults.getDouble(15);
-                boolean financed = queryResults.getBoolean(16);
-                double monthlyPayment = queryResults.getDouble(17);
-                vehicle = new Vehicle(vin,year,make,model,type,color,odometer,price);
-                SalesContract salesContract = new SalesContract(date,customerName,customerEmail,vehicle,salesTax,recordingFee,processingFee,totalPrice,financed,monthlyPayment);
-                results.add(salesContract);
+            while (queryResults.next()) {
+                LocalDate dateSold = queryResults.getDate("date_sold").toLocalDate();
+                String customerName = queryResults.getString("customer_name");
+                String customerEmail = queryResults.getString("customer_email");
+                int vin = queryResults.getInt("vin");
+                int year = queryResults.getInt("year");
+                String make = queryResults.getString("make");
+                String model = queryResults.getString("model");
+                String color = queryResults.getString("color");
+                String type = queryResults.getString("type");
+                int mileage = queryResults.getInt("mileage");
+                double price = queryResults.getDouble("price");
+                int salesTax = queryResults.getInt("sales_tax");
+                int recordingFee = queryResults.getInt("recording_fee");
+                int processingFee = queryResults.getInt("processingFee");
+                double totalPrice = queryResults.getDouble("total_price");
+                boolean financed = queryResults.getBoolean("financed");
+                double monthlyPayment = queryResults.getDouble("monthly_payment");
+                vehicle = new Vehicle(vin,year,make,model,type,color,mileage,price);
+                SalesContract salesContract = new SalesContract(dateSold,customerName,customerEmail,vehicle,salesTax,recordingFee,processingFee,totalPrice,financed,monthlyPayment);
+                salesResults.add(salesContract);
 
 
 
@@ -85,10 +85,10 @@ public class SalesContractDAO {
             }
 
 
-        } catch (SQLException e) {
-            System.out.println("ERRRORING");
+        } catch (Exception e) {
+           e.printStackTrace();
         }
 
-        return results;
+        return salesResults;
     }
 }
