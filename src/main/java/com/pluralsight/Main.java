@@ -31,7 +31,7 @@ public class Main {
         System.out.println("If you are a User, Just ignore the password and press Enter");
         System.out.println("If you want to quit please Enter the 0 key");
         do {
-            System.out.println("If you are a User, Just ignore the password and press Enter");
+            System.out.println("If you are a User, Just ignore the password and press Enter(0 to quit out)");
 
 
             password = console.promptForString("Enter your password: ", true);
@@ -41,7 +41,7 @@ public class Main {
 
                 AdminUserInterface UI = new AdminUserInterface(dealershipDAO,salesContractDAO,leaseContractDAO);
 
-                UI.displayMenu();
+                UI.display();
 
 
 

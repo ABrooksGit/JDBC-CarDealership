@@ -29,14 +29,9 @@ public class UserInterface {
         this.l = l;
     }
 
-    private void init() {
 
-
-    }
 
     public void displayMenu() {
-        init();
-
         display();
     }
 

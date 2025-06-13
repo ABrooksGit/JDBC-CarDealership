@@ -30,7 +30,10 @@ public class AdminUserInterface {
 
     private void displayAllContacts(){
 
+        System.out.println("Lease Contracts: ");
         l.getLeaseContracts().stream().forEach(l -> System.out.println(l.toString()));
+        System.out.println("-----------------------------------------------------------------------------------------------------------");
+        System.out.println("Sales Contracts: ");
         s.getSalesContracts().stream().forEach( s -> System.out.println(s.toString()));
 
 
@@ -38,45 +41,54 @@ public class AdminUserInterface {
     }
 
 
-    private void display(){
+    public void display() {
 
-        int input;
-        String homeScreenPrompt = """
-                Welcome Admin What do you want to do:\s
-                 1 - Make Vehicle Lease\s
-                 2 - Make Vehicle Sale\s
-                 3 - Display All\s
-                 4 - Display Leases\s
-                 5 - Display Sales\s
-                 0 - Quit
-                Enter your command(number 1-9):\s""";
+        System.out.println("Welcome Admin What do you want to do");
 
+        while (true) {
+            String[] homeScreenPrompt = {
+                    "Make Vehicle Lease",
+                    "Make Vehicle Sale",
+                    "Display All",
+                    "Display Leases",
+                    "Display Sales",
+                    "Return to Login Menu",
+                    "Quit"
+            };
 
-        do{
-            input = console.promptForInt(homeScreenPrompt);
-            switch (input){
-                case 1: processVehicleByLease();
+            int input = console.promptForOption(homeScreenPrompt);
+            switch (input) {
+                case 1:
+                    processVehicleByLease();
                     break;
-                case 2: processVehicleBySale();
+                case 2:
+                    processVehicleBySale();
                     break;
-                case 3: displayAllContacts();
+                case 3:
+                    displayAllContacts();
                     break;
-                case 4:displayLease();
+                case 4:
+                    displayLease();
                     break;
-                case 5:displaySales();
+                case 5:
+                    displaySales();
                     break;
-                case 0:
+                case 6:
+                    return;
+                case 7:
                     System.out.println("Quitting...");
                     break;
-                default:
-                    System.out.println("Not a valid input");
-                    break;
             }
-
-
-        } while(input != 0);
-
+        }
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -94,7 +106,10 @@ public class AdminUserInterface {
         if(leaseContracts.stream().count() <= 0){
             System.out.println("No lease contacts here...");
         } else{
+            System.out.println(" ");
+            System.out.println("Lease Contracts: ");
             leaseContracts.stream().forEach(l -> System.out.println(l.toString()));
+            System.out.println(" ");
         }
 
 
@@ -113,7 +128,10 @@ public class AdminUserInterface {
             System.out.println("No sale contracts found...");
         }
         else {
+            System.out.println(" ");
+            System.out.println("Sales Contracts: ");
             salesContracts.stream().forEach( s -> System.out.println(s.toString()));
+            System.out.println(" ");
         }
 
 
@@ -182,8 +200,7 @@ public class AdminUserInterface {
         }
 
 
-
-    }
+}
 
 
 
